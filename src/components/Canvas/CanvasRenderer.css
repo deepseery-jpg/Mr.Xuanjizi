@@ -1,0 +1,156 @@
+.ai-canvas-figure {
+  margin: 14px 0;
+  color: var(--text);
+  max-width: 100%;
+}
+
+.ai-canvas-figure.compact {
+  margin: 8px 0;
+}
+
+.ai-canvas-title {
+  margin: 0 0 8px;
+  color: var(--gold-bright);
+  font-family: var(--brush);
+  font-size: 21px;
+  letter-spacing: 3px;
+  text-align: center;
+}
+
+.ai-canvas-svg {
+  display: block;
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  margin: 0 auto;
+  overflow: visible;
+}
+
+.ai-canvas-svg.wide,
+.ai-canvas-svg.table {
+  max-width: 720px;
+}
+
+.ai-canvas-svg text {
+  font-family: var(--serif);
+  paint-order: stroke;
+  stroke: rgba(8, 6, 18, 0.78);
+  stroke-width: 2px;
+  stroke-linejoin: round;
+}
+
+.ai-canvas-node-text,
+.ai-canvas-pillar-main,
+.ai-canvas-center-text {
+  fill: var(--gold-bright);
+  font-family: var(--brush);
+  font-size: 22px;
+  letter-spacing: 2px;
+}
+
+.ai-canvas-pillar-main {
+  font-size: 31px;
+}
+
+.ai-canvas-pillar-main.branch {
+  fill: var(--gold);
+}
+
+.ai-canvas-center-text {
+  font-size: 18px;
+}
+
+.ai-canvas-label {
+  fill: var(--text);
+  font-size: 12px;
+  letter-spacing: 0.5px;
+}
+
+.ai-canvas-small-text {
+  fill: var(--faint);
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 1.6px;
+}
+
+.ai-canvas-small-text.accent,
+.ai-canvas-label.accent,
+.ai-canvas-note-text.accent {
+  fill: var(--gold-bright);
+}
+
+.ai-canvas-label.good,
+.ai-canvas-note-text.good {
+  fill: var(--jade);
+}
+
+.ai-canvas-label.bad,
+.ai-canvas-note-text.bad {
+  fill: var(--danger);
+}
+
+.ai-canvas-edge-label {
+  fill: var(--jade);
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 1px;
+}
+
+.ai-canvas-edge-label.bad {
+  fill: var(--danger);
+}
+
+.ai-canvas-note-text {
+  fill: var(--muted);
+  font-size: 10.5px;
+}
+
+.ai-canvas-sector {
+  fill: rgba(201, 162, 94, 0.035);
+  stroke: rgba(201, 162, 94, 0.14);
+  transition: fill 0.18s ease, stroke 0.18s ease;
+}
+
+.ai-canvas-sector.good {
+  fill: rgba(164, 201, 174, 0.09);
+  stroke: rgba(164, 201, 174, 0.26);
+}
+
+.ai-canvas-sector.bad {
+  fill: rgba(217, 107, 91, 0.08);
+  stroke: rgba(217, 107, 91, 0.24);
+}
+
+.ai-canvas-sector.accent {
+  fill: rgba(105, 186, 205, 0.08);
+  stroke: rgba(105, 186, 205, 0.26);
+}
+
+.ai-canvas-placeholder {
+  display: inline-block;
+  max-width: 100%;
+  border: 1px dashed var(--line);
+  border-radius: 6px;
+  padding: 8px 10px;
+  color: var(--faint);
+  font-size: 12px;
+  background: rgba(8, 6, 18, 0.45);
+}
+
+.ai-canvas-figure .is-highlight circle:first-child {
+  filter: drop-shadow(0 0 10px rgba(239, 210, 145, 0.72));
+}
+
+@media (max-width: 520px) {
+  .ai-canvas-title {
+    font-size: 18px;
+  }
+
+  .ai-canvas-svg.table {
+    min-width: 560px;
+  }
+
+  .ai-canvas-figure[data-type='compare'] {
+    overflow-x: auto;
+  }
+}
