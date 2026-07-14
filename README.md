@@ -12,7 +12,7 @@
 ![Methods](https://img.shields.io/badge/术数-27_门-C9A25E)
 ![Local First](https://img.shields.io/badge/排盘-浏览器本地运行-79B8A0)
 
-[项目预览](#项目预览) · [功能矩阵](#功能矩阵) · [快速开始](#快速开始) · [技术架构](#技术架构) · [方法边界](#传统对齐与方法边界)
+[在线体验](https://deepseery-jpg.github.io/Mr.Xuanjizi/) · [项目预览](#项目预览) · [功能矩阵](#功能矩阵) · [快速开始](#快速开始) · [技术架构](#技术架构) · [方法边界](#传统对齐与方法边界)
 
 </div>
 
