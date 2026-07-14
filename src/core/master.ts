@@ -1,7 +1,7 @@
 // 玄机子舞台总线 — 全站唯一真身的状态中枢
 // 职责: 表情/姿势/法器状态机 · UI事件反应(带冷却) · AI舞台指令解析 · 指针追踪 · 打盹与唤醒
 import { useSyncExternalStore } from 'react'
-import { sfxTick, sfxMystic } from './audio.ts'
+import { sfxTick, sfxMystic, sfxWoodfish } from './audio.ts'
 
 export type XzExpression =
   | 'neutral' | 'smile' | 'grin' | 'think' | 'surprised' | 'serious'
@@ -348,7 +348,7 @@ const REACTIONS: Record<string, () => void> = {
     if (now - pokeReset > 6000) pokeCount = 0
     pokeReset = now
     pokeCount++
-    sfxTick()
+    sfxWoodfish()
     if (pokeCount === 1) { impulse({ expression: 'surprised' }, 2000); say(pick(['嗯? 我在呢。', '怎么了, 想问哪一门?', '你点我一下, 我就当你是在催我了。']), 2400) }
     else if (pokeCount === 2) { impulse({ expression: 'smile' }, 2200); motion('nod'); say(pick(['别急, 先把要问的事说清楚。', '我听着, 你先选盘。', '手别只点我, 左边还有正事。']), 3000) }
     else if (pokeCount === 3) { impulse({ expression: 'annoyed' }, 2800); motion('shake'); say(pick(['再点胡子就乱了。', '好了好了, 贫道知道你在。', '别闹, 有问题就起盘问。']), 3000) }

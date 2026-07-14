@@ -56,6 +56,54 @@ export function sfxTick() {
   tone(1200, 0.05, 'square', 0.04, 0, 300)
 }
 
+/** 木鱼轻叩 */
+export function sfxWoodfish() {
+  const c = ac()
+  if (!c) return
+  const t0 = c.currentTime
+  const pitch = 2 ** ((Math.random() * 16 - 8) / 1200)
+
+  // 木槌接触面的极短噪声，负责木质的「嗒」而不是电子音的起音。
+  const hitLength = Math.ceil(c.sampleRate * 0.028)
+  const hitBuffer = c.createBuffer(1, hitLength, c.sampleRate)
+  const hitData = hitBuffer.getChannelData(0)
+  for (let i = 0; i < hitLength; i++) {
+    const envelope = Math.exp(-i / (c.sampleRate * 0.0045))
+    hitData[i] = (Math.random() * 2 - 1) * envelope
+  }
+  const hit = c.createBufferSource()
+  const hitFilter = c.createBiquadFilter()
+  const hitGain = c.createGain()
+  hit.buffer = hitBuffer
+  hitFilter.type = 'bandpass'
+  hitFilter.frequency.setValueAtTime(1750, t0)
+  hitFilter.Q.setValueAtTime(0.75, t0)
+  hitGain.gain.setValueAtTime(0.18, t0)
+  hitGain.gain.exponentialRampToValueAtTime(0.0001, t0 + 0.03)
+  hit.connect(hitFilter).connect(hitGain).connect(c.destination)
+  hit.start(t0)
+
+  // 木鱼腹腔的几组非整数倍共鸣；快起、短衰减，形成中空的「笃」。
+  const modes = [
+    { frequency: 510, gain: 0.16, decay: 0.145 },
+    { frequency: 805, gain: 0.09, decay: 0.095 },
+    { frequency: 1315, gain: 0.035, decay: 0.055 },
+  ]
+  for (const mode of modes) {
+    const oscillator = c.createOscillator()
+    const resonance = c.createGain()
+    oscillator.type = 'sine'
+    oscillator.frequency.setValueAtTime(mode.frequency * pitch, t0)
+    oscillator.frequency.exponentialRampToValueAtTime(mode.frequency * pitch * 0.975, t0 + mode.decay)
+    resonance.gain.setValueAtTime(0.0001, t0)
+    resonance.gain.exponentialRampToValueAtTime(mode.gain, t0 + 0.0015)
+    resonance.gain.exponentialRampToValueAtTime(0.0001, t0 + mode.decay)
+    oscillator.connect(resonance).connect(c.destination)
+    oscillator.start(t0)
+    oscillator.stop(t0 + mode.decay + 0.02)
+  }
+}
+
 /** 大师开口 */
 export function sfxSpeak() {
   tone(660, 0.09, 'sine', 0.06)
